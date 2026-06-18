@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SimbioIT — Referência de paleta</title>
+<style>
+  :root {
+    --brand-teal:  #20B8C4;
+    --brand-green: #5FBF7E;
+    --brand-lime:  #A8CC3C;
+    --bg-base:     #0B1517;
+    --bg-surface:  #11201F;
+    --border:      #1E3A38;
+    --text:        #E8F1F0;
+    --text-muted:  #8FA8A6;
+    --brand-grad:  linear-gradient(135deg, #20B8C4 0%, #5FBF7E 55%, #A8CC3C 100%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg-base);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    /* glow sutil de observabilidade */
+    background-image:
+      radial-gradient(800px 400px at 80% -5%, rgba(32,184,196,.18), transparent 60%),
+      radial-gradient(600px 400px at 0% 100%, rgba(168,204,60,.08), transparent 60%);
+    background-attachment: fixed;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 56px 24px 80px; }
+  h1 { font-size: 14px; letter-spacing: .25em; text-transform: uppercase;
+       color: var(--text-muted); font-weight: 600; margin-bottom: 40px; }
+  h2 { font-size: 13px; letter-spacing: .15em; text-transform: uppercase;
+       color: var(--brand-teal); margin: 48px 0 18px; font-weight: 700; }
+
+  /* ---- logos sobre o fundo ---- */
+  .logo-row { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; }
+  .logo-card {
+    background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px 34px; display: flex;
+    align-items: center; justify-content: center; min-height: 120px;
+  }
+  .logo-card img { max-height: 64px; width: auto; display: block; }
+  .logo-card.reduzido img { max-height: 96px; }
+  .label { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+
+  /* compara fundo teal vs preto puro */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .compare > div { border: 1px solid var(--border); border-radius: 16px;
+    padding: 30px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .bg-teal  { background: var(--bg-base); }
+  .bg-black { background: #000; }
+  .compare img { max-height: 72px; }
+  .tag { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+
+  /* ---- swatches ---- */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 14px; }
+  .swatch { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .swatch .chip { height: 72px; }
+  .swatch .info { background: var(--bg-surface); padding: 10px 12px; font-size: 12px; }
+  .swatch .info b { display: block; color: var(--text); font-size: 13px; }
+  .swatch .info span { color: var(--text-muted); font-family: ui-monospace, monospace; }
+
+  /* ---- gradiente ---- */
+  .grad-bar { height: 70px; border-radius: 14px; background: var(--brand-grad); }
+
+  /* ---- amostra de hero ---- */
+  .hero {
+    margin-top: 18px; border: 1px solid var(--border); border-radius: 20px;
+    background: var(--bg-surface); padding: 56px 44px;
+    background-image: radial-gradient(600px 300px at 90% -20%, rgba(32,184,196,.22), transparent 60%);
+  }
+  .hero .eyebrow { color: var(--brand-lime); font-size: 13px; letter-spacing:.18em;
+    text-transform: uppercase; font-weight: 700; }
+  .hero h3 { font-size: 42px; line-height: 1.1; margin: 14px 0 16px; font-weight: 800;
+    letter-spacing: -.02em; max-width: 18ch; }
+  .hero h3 .grad { background: var(--brand-grad); -webkit-background-clip: text;
+    background-clip: text; color: transparent; }
+  .hero p { color: var(--text-muted); max-width: 56ch; margin-bottom: 28px; }
+  .btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn { border: none; border-radius: 10px; padding: 13px 22px; font-size: 15px;
+    font-weight: 600; cursor: pointer; }
+  .btn-primary { background: var(--brand-teal); color: #06201f; }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+
+  /* ---- cards de serviço ---- */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; margin-top: 16px; }
+  .card { background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 26px; }
+  .card .dot { width: 38px; height: 38px; border-radius: 10px; background: var(--brand-grad); margin-bottom: 16px; }
+  .card h4 { font-size: 18px; margin-bottom: 8px; }
+  .card p { color: var(--text-muted); font-size: 14px; }
+  .card .metric { font-size: 30px; font-weight: 800; margin-top: 14px;
+    background: var(--brand-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>SimbioIT · Referência de paleta &amp; fundo</h1>
+
+  <h2>Logo no fundo do site</h2>
+  <div class="logo-row">
+    <div>
+      <div class="logo-card"><img src="../antigo/imagens/logo.png" alt="logo SimbioIT"></div>
+      <div class="label">logo.png</div>
+    </div>
+    <div>
+      <div class="logo-card reduzido"><img src="../antigo/imagens/logo-reduzido.png" alt="logo reduzido"></div>
+      <div class="label">logo-reduzido.png</div>
+    </div>
+  </div>
+
+  <h2>Por que não usar preto puro</h2>
+  <div class="compare">
+    <div class="bg-teal">
+      <img src="../antigo/imagens/logo-reduzido.png" alt="logo no fundo teal">
+      <span class="tag">bg-base · #0B1517 (recomendado)</span>
+    </div>
+    <div class="bg-black">
+      <img src="../antigo/imagens/logo-reduzido.png" alt="logo no fundo preto">
+      <span class="tag">preto puro · #000000</span>
+    </div>
+  </div>
+
+  <h2>Tokens da paleta</h2>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#20B8C4"></div><div class="info"><b>brand-teal</b><span>#20B8C4</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#5FBF7E"></div><div class="info"><b>brand-green</b><span>#5FBF7E</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#A8CC3C"></div><div class="info"><b>brand-lime</b><span>#A8CC3C</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#0B1517"></div><div class="info"><b>bg-base</b><span>#0B1517</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#11201F"></div><div class="info"><b>bg-surface</b><span>#11201F</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#1E3A38"></div><div class="info"><b>border</b><span>#1E3A38</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#E8F1F0"></div><div class="info"><b>text</b><span>#E8F1F0</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#8FA8A6"></div><div class="info"><b>text-muted</b><span>#8FA8A6</span></div></div>
+  </div>
+
+  <h2>Gradiente da marca</h2>
+  <div class="grad-bar"></div>
+
+  <h2>Amostra — Hero</h2>
+  <div class="hero">
+    <div class="eyebrow">DevOps · FinOps · APM</div>
+    <h3>Transformando Desafios em <span class="grad">Soluções Inovadoras</span></h3>
+    <p>Especialistas em DevOps, FinOps e APM Monitoramento. Nossa força está na diversidade, expertise e compromisso com a excelência.</p>
+    <div class="btns">
+      <button class="btn btn-primary">Conheça nossos serviços</button>
+      <button class="btn btn-ghost">Entre em contato</button>
+    </div>
+  </div>
+
+  <h2>Amostra — Cards de serviço</h2>
+  <div class="cards">
+    <div class="card"><div class="dot"></div><h4>DevOps / SRE</h4><p>Automação, CI/CD e alta disponibilidade.</p><div class="metric">99.9%</div></div>
+    <div class="card"><div class="dot"></div><h4>FinOps</h4><p>Governança e otimização de custos na nuvem.</p><div class="metric">40%</div></div>
+    <div class="card"><div class="dot"></div><h4>APM</h4><p>Observabilidade completa em tempo real.</p><div class="metric">360°</div></div>
+  </div>
+</div>
+</body>
+</html>

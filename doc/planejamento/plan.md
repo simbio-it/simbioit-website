@@ -25,6 +25,7 @@ Todos os caminhos são relativos a `doc/planejamento/`.
 | `antigo/imagens/` | `logo.png`, `logo-reduzido.png`, `logo-reduzido-2.png` | Logos oficiais — **usar estes**. |
 | `referencias/imagens-legais/` | Imagens de sites que o cliente curtiu | **Só inspiração** — não copiar; capturar o "mood" (dark, hero premium, estética AI/SRE). |
 | `referencias/componet-prompt.md` | Componentes do [21st.dev](https://21st.dev) que o cliente gostou, com instruções de integração | Base para componentes (hero, etc.). Stack: **React + shadcn/ui + Tailwind + TypeScript**. |
+| `referencias/paleta.html` | Mock visual da paleta (logo no fundo, swatches, gradiente, hero/cards) — **aprovado** | Abrir no navegador. Fonte da verdade das cores; ver seção 3. |
 
 ### Páginas do site antigo (conteúdo já extraído)
 
@@ -45,6 +46,33 @@ Todos os caminhos são relativos a `doc/planejamento/`.
   evitar o visual "padrão de template".
 - **Logos:** usar os de `antigo/imagens/`.
 
+### Paleta de cores (derivada do logo)
+
+O logo é um gradiente **teal → verde → verde-limão**. A paleta segue essas
+cores para o logo combinar com o fundo. **Regra principal:** o fundo escuro
+**não é preto puro** — é um escuro com leve tom *teal* (deep teal-charcoal),
+para o logo "pertencer" ao fundo e não ficar perdido.
+
+| Token | Hex | Uso |
+|---|---|---|
+| `brand-teal` | `#20B8C4` | Cor primária (links, botões, ícones, o "D" do logo) |
+| `brand-green` | `#5FBF7E` | Secundária / transições de gradiente |
+| `brand-lime` | `#A8CC3C` | Acento (destaques, métricas, hovers) |
+| `bg-base` | `#0B1517` | Fundo principal (escuro com tom teal, não `#000`) |
+| `bg-surface` | `#11201F` | Cards, seções elevadas |
+| `border` | `#1E3A38` | Bordas / divisórias sutis |
+| `text` | `#E8F1F0` | Texto principal (off-white levemente teal) |
+| `text-muted` | `#8FA8A6` | Texto secundário |
+
+- **Gradiente da marca:** `linear-gradient(135deg, #20B8C4 → #5FBF7E → #A8CC3C)`
+  — usar no hero, em títulos de destaque e detalhes, ecoando o logo.
+- **Acento de luz:** glows/auras sutis em `brand-teal` sobre o fundo escuro
+  (estética de observabilidade), nunca lavando o contraste do texto.
+
+> **Mock visual:** `referencias/paleta.html` — abrir no navegador para ver o logo
+> sobre o fundo recomendado (comparado com preto puro), os swatches, o gradiente
+> e amostras de hero/cards aplicando a paleta.
+
 ## 4. Stack técnica
 
 - **Framework:** React + TypeScript
@@ -53,35 +81,36 @@ Todos os caminhos são relativos a `doc/planejamento/`.
 - Componentes de referência em `referencias/componet-prompt.md` já assumem essa
   stack (estrutura shadcn, `/components/ui`).
 
-## 5. Estrutura de páginas e seções
+## 5. Estrutura — Single-page com âncoras
 
-### Home (`antigo/home.md`)
-1. **Hero** — "Transformando Desafios em Soluções Inovadoras" + 2 CTAs
-   (Conheça nossos serviços / Entre em contato). Destaques: Cloud Native,
-   Alta Performance, Segurança.
-2. **Nossos Serviços** — cards DevOps/SRE, FinOps, APM (cada um com bullets + CTA).
-3. **Nossos Diferenciais** — pipeline cíclico de 6 fases (Diagnóstico →
-   Plano → Implementação → Monitoramento → Otimização → Evolução).
-4. **Nossa Equipe** — Rodrigo Moreira (CTO-SRE), Bruno Arruda (CEO-DevOps),
+O site é **uma única página** com rolagem por seções. A navegação usa
+**âncoras** (scroll suave) em vez de páginas separadas. O conteúdo das 4 páginas
+do site antigo vira seções desta página única.
+
+- **Nav fixa (sticky):** Logo · Serviços · DevOps · FinOps · APM · Equipe · Contato
+- **Âncoras:** `#servicos` · `#devops` · `#finops` · `#apm` · `#equipe` · `#contato`
+
+### Ordem das seções
+
+1. **Hero** (`#topo`, de `antigo/home.md`) — "Transformando Desafios em Soluções
+   Inovadoras" + 2 CTAs (Conheça nossos serviços ↦ `#servicos` / Entre em
+   contato ↦ `#contato`). Destaques: Cloud Native, Alta Performance, Segurança.
+2. **Serviços** (`#servicos`) — cards DevOps/SRE, FinOps, APM (bullets + CTA que
+   leva à seção detalhada correspondente).
+3. **DevOps & SRE** (`#devops`, de `antigo/devops.md`) — 6 soluções (CI/CD, IaC,
+   Monitoring, Security, Containers, DR) + métrica destaque **99.9% uptime**.
+4. **FinOps** (`#finops`, de `antigo/finops.md`) — 6 capacidades de governança +
+   metodologia em 4 etapas + métrica destaque **40% economia**.
+5. **APM / Observabilidade** (`#apm`, de `antigo/apm.md`) — plataforma,
+   recursos e **planos** (Starter / Professional / Enterprise / Personalizado).
+6. **Diferenciais** — pipeline cíclico de 6 fases (Diagnóstico → Plano →
+   Implementação → Monitoramento → Otimização → Evolução).
+7. **Equipe** (`#equipe`) — Rodrigo Moreira (CTO-SRE), Bruno Arruda (CEO-DevOps),
    Francis Rizzo (CEO-FinOps), CREW IA (IA Bot).
-5. **Contato** — formulário (Nome*, Email*, Serviço de interesse, Mensagem*).
-
-### DevOps & SRE (`antigo/devops.md`)
-Hero → 6 soluções (CI/CD, IaC, Monitoring, Security, Containers, DR) →
-resultados (métrica destaque **99.9% uptime**) → CTA consultoria.
-
-### FinOps (`antigo/finops.md`)
-Hero → 6 capacidades de governança → metodologia em 4 etapas →
-benefícios (métrica destaque **40% economia**) → CTA orçamento.
-
-### APM / Observabilidade (`antigo/apm.md`)
-Hero → plataforma de observabilidade (telas) → solução all-in-one →
-arquitetura aberta → recursos → **planos** (Starter/Professional/Enterprise/
-Personalizado) → proposta personalizada.
-
-### Comum (`antigo/rodape-e-navegacao.md`)
-- **Nav:** Home · DevOps · FinOps · APM
-- **Rodapé:** tagline + links (GitHub, Serviços, Contato) + © SimbioIT.
+8. **Contato** (`#contato`) — formulário (Nome*, Email*, Serviço de interesse,
+   Mensagem*).
+9. **Rodapé** (`antigo/rodape-e-navegacao.md`) — tagline + links (GitHub,
+   âncoras de serviços, Contato) + © SimbioIT.
 
 ## 6. Como usar este plano (para a IA)
 

@@ -3,101 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SimbioIT — Referência de paleta</title>
+<title>SimbioIT — Paleta &amp; tipografia (final)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --brand-teal:  #20B8C4;
-    --brand-green: #5FBF7E;
-    --brand-lime:  #A8CC3C;
-    --bg-base:     #0B1517;
-    --bg-surface:  #11201F;
-    --border:      #1E3A38;
-    --text:        #E8F1F0;
-    --text-muted:  #8FA8A6;
-    --brand-grad:  linear-gradient(135deg, #20B8C4 0%, #5FBF7E 55%, #A8CC3C 100%);
+    /* Paleta aprovada — sincronizada com src/index.css */
+    --brand-teal:  #2CC7D3;
+    --brand-green: #74D693;
+    --brand-lime:  #B6D94E;
+    --bg-base:     #111B21;
+    --bg-surface:  #19262D;
+    --bg-elevated: #21323A;
+    --border:      #2E454D;
+    --ink:         #EEF3F3;
+    --ink-muted:   #B4C4C3;
+    --ink-faint:   #80999A;
+    --brand-grad:  linear-gradient(135deg, #2CC7D3 0%, #74D693 55%, #B6D94E 100%);
+    --font-display: "Space Grotesk", sans-serif;
+    --font-sans: "Hanken Grotesk", sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background: var(--bg-base);
-    color: var(--text);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.5;
-    /* glow sutil de observabilidade */
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
     background-image:
-      radial-gradient(800px 400px at 80% -5%, rgba(32,184,196,.18), transparent 60%),
-      radial-gradient(600px 400px at 0% 100%, rgba(168,204,60,.08), transparent 60%);
+      radial-gradient(800px 400px at 80% -5%, rgba(44,199,211,.16), transparent 60%),
+      radial-gradient(600px 400px at 0% 100%, rgba(182,217,78,.07), transparent 60%);
     background-attachment: fixed;
   }
   .wrap { max-width: 1000px; margin: 0 auto; padding: 56px 24px 80px; }
-  h1 { font-size: 14px; letter-spacing: .25em; text-transform: uppercase;
-       color: var(--text-muted); font-weight: 600; margin-bottom: 40px; }
-  h2 { font-size: 13px; letter-spacing: .15em; text-transform: uppercase;
-       color: var(--brand-teal); margin: 48px 0 18px; font-weight: 700; }
+  h1 { font-family: var(--font-mono); font-size: 13px; letter-spacing: .22em; text-transform: uppercase;
+       color: var(--ink-faint); font-weight: 500; margin-bottom: 40px; }
+  h2 { font-family: var(--font-mono); font-size: 12px; letter-spacing: .15em; text-transform: uppercase;
+       color: var(--brand-teal); margin: 48px 0 18px; font-weight: 500; }
 
-  /* ---- logos sobre o fundo ---- */
   .logo-row { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; }
-  .logo-card {
-    background: var(--bg-surface); border: 1px solid var(--border);
-    border-radius: 16px; padding: 28px 34px; display: flex;
-    align-items: center; justify-content: center; min-height: 120px;
-  }
+  .logo-card { background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px 34px; display: flex; align-items: center; justify-content: center; min-height: 120px; }
   .logo-card img { max-height: 64px; width: auto; display: block; }
   .logo-card.reduzido img { max-height: 96px; }
-  .label { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+  .label { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); margin-top: 8px; }
 
-  /* compara fundo teal vs preto puro */
-  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .compare > div { border: 1px solid var(--border); border-radius: 16px;
-    padding: 30px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-  .bg-teal  { background: var(--bg-base); }
-  .bg-black { background: #000; }
-  .compare img { max-height: 72px; }
-  .tag { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
-
-  /* ---- swatches ---- */
   .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 14px; }
   .swatch { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
   .swatch .chip { height: 72px; }
   .swatch .info { background: var(--bg-surface); padding: 10px 12px; font-size: 12px; }
-  .swatch .info b { display: block; color: var(--text); font-size: 13px; }
-  .swatch .info span { color: var(--text-muted); font-family: ui-monospace, monospace; }
+  .swatch .info b { display: block; color: var(--ink); font-size: 13px; font-family: var(--font-sans); }
+  .swatch .info span { color: var(--ink-faint); font-family: var(--font-mono); }
 
-  /* ---- gradiente ---- */
   .grad-bar { height: 70px; border-radius: 14px; background: var(--brand-grad); }
 
-  /* ---- amostra de hero ---- */
-  .hero {
-    margin-top: 18px; border: 1px solid var(--border); border-radius: 20px;
-    background: var(--bg-surface); padding: 56px 44px;
-    background-image: radial-gradient(600px 300px at 90% -20%, rgba(32,184,196,.22), transparent 60%);
-  }
-  .hero .eyebrow { color: var(--brand-lime); font-size: 13px; letter-spacing:.18em;
-    text-transform: uppercase; font-weight: 700; }
-  .hero h3 { font-size: 42px; line-height: 1.1; margin: 14px 0 16px; font-weight: 800;
-    letter-spacing: -.02em; max-width: 18ch; }
-  .hero h3 .grad { background: var(--brand-grad); -webkit-background-clip: text;
-    background-clip: text; color: transparent; }
-  .hero p { color: var(--text-muted); max-width: 56ch; margin-bottom: 28px; }
-  .btns { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn { border: none; border-radius: 10px; padding: 13px 22px; font-size: 15px;
-    font-weight: 600; cursor: pointer; }
-  .btn-primary { background: var(--brand-teal); color: #06201f; }
-  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  /* Tipografia */
+  .type { display: flex; flex-direction: column; gap: 22px; }
+  .type .row { border: 1px solid var(--border); border-radius: 16px; background: var(--bg-surface); padding: 24px 26px; }
+  .type .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--brand-lime); }
+  .display-sample { font-family: var(--font-display); font-weight: 600; font-size: 34px; letter-spacing: -.02em; line-height: 1.1; margin-top: 8px; }
+  .body-sample { font-family: var(--font-sans); font-size: 17px; color: var(--ink-muted); margin-top: 10px; max-width: 62ch; }
+  .mono-sample { font-family: var(--font-mono); font-size: 13px; color: var(--ink-faint); margin-top: 10px; }
 
-  /* ---- cards de serviço ---- */
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; margin-top: 16px; }
-  .card { background: var(--bg-surface); border: 1px solid var(--border);
-    border-radius: 16px; padding: 26px; }
-  .card .dot { width: 38px; height: 38px; border-radius: 10px; background: var(--brand-grad); margin-bottom: 16px; }
-  .card h4 { font-size: 18px; margin-bottom: 8px; }
-  .card p { color: var(--text-muted); font-size: 14px; }
-  .card .metric { font-size: 30px; font-weight: 800; margin-top: 14px;
-    background: var(--brand-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero { margin-top: 18px; border: 1px solid var(--border); border-radius: 20px; background: var(--bg-surface); padding: 56px 44px;
+    background-image: radial-gradient(600px 300px at 90% -20%, rgba(44,199,211,.20), transparent 60%); }
+  .hero .eyebrow { font-family: var(--font-mono); color: var(--brand-lime); font-size: 12px; letter-spacing:.18em; text-transform: uppercase; }
+  .hero h3 { font-family: var(--font-display); font-size: 42px; line-height: 1.1; margin: 14px 0 16px; font-weight: 700; letter-spacing: -.02em; max-width: 18ch; }
+  .hero h3 .grad { background: var(--brand-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { color: var(--ink-muted); max-width: 56ch; margin-bottom: 28px; }
+  .btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn { border: none; border-radius: 10px; padding: 13px 22px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: var(--font-sans); }
+  .btn-primary { background: var(--brand-teal); color: #06201f; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>SimbioIT · Referência de paleta &amp; fundo</h1>
+  <h1>SimbioIT · Paleta &amp; tipografia — aprovada (final)</h1>
 
   <h2>Logo no fundo do site</h2>
   <div class="logo-row">
@@ -111,32 +95,38 @@
     </div>
   </div>
 
-  <h2>Por que não usar preto puro</h2>
-  <div class="compare">
-    <div class="bg-teal">
-      <img src="../antigo/imagens/logo-reduzido.png" alt="logo no fundo teal">
-      <span class="tag">bg-base · #0B1517 (recomendado)</span>
-    </div>
-    <div class="bg-black">
-      <img src="../antigo/imagens/logo-reduzido.png" alt="logo no fundo preto">
-      <span class="tag">preto puro · #000000</span>
-    </div>
-  </div>
-
   <h2>Tokens da paleta</h2>
   <div class="swatches">
-    <div class="swatch"><div class="chip" style="background:#20B8C4"></div><div class="info"><b>brand-teal</b><span>#20B8C4</span></div></div>
-    <div class="swatch"><div class="chip" style="background:#5FBF7E"></div><div class="info"><b>brand-green</b><span>#5FBF7E</span></div></div>
-    <div class="swatch"><div class="chip" style="background:#A8CC3C"></div><div class="info"><b>brand-lime</b><span>#A8CC3C</span></div></div>
-    <div class="swatch"><div class="chip" style="background:#0B1517"></div><div class="info"><b>bg-base</b><span>#0B1517</span></div></div>
-    <div class="swatch"><div class="chip" style="background:#11201F"></div><div class="info"><b>bg-surface</b><span>#11201F</span></div></div>
-    <div class="swatch"><div class="chip" style="background:#1E3A38"></div><div class="info"><b>border</b><span>#1E3A38</span></div></div>
-    <div class="swatch"><div class="chip" style="background:#E8F1F0"></div><div class="info"><b>text</b><span>#E8F1F0</span></div></div>
-    <div class="swatch"><div class="chip" style="background:#8FA8A6"></div><div class="info"><b>text-muted</b><span>#8FA8A6</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#2CC7D3"></div><div class="info"><b>brand-teal</b><span>#2CC7D3</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#74D693"></div><div class="info"><b>brand-green</b><span>#74D693</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#B6D94E"></div><div class="info"><b>brand-lime</b><span>#B6D94E</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#111B21"></div><div class="info"><b>bg-base</b><span>#111B21</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#19262D"></div><div class="info"><b>bg-surface</b><span>#19262D</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#21323A"></div><div class="info"><b>bg-elevated</b><span>#21323A</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#2E454D"></div><div class="info"><b>border</b><span>#2E454D</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#EEF3F3"></div><div class="info"><b>ink</b><span>#EEF3F3</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#B4C4C3"></div><div class="info"><b>ink-muted</b><span>#B4C4C3</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#80999A"></div><div class="info"><b>ink-faint</b><span>#80999A</span></div></div>
   </div>
 
   <h2>Gradiente da marca</h2>
   <div class="grad-bar"></div>
+
+  <h2>Tipografia</h2>
+  <div class="type">
+    <div class="row">
+      <span class="tag">Display · Space Grotesk</span>
+      <div class="display-sample">Transformando Desafios em Soluções Inovadoras</div>
+    </div>
+    <div class="row">
+      <span class="tag">Corpo · Hanken Grotesk</span>
+      <p class="body-sample">Observabilidade completa das suas aplicações com monitoramento em tempo real, análise de performance e detecção proativa de problemas antes que afetem seus usuários. Reduza custos de nuvem e garanta a eficiência financeira do seu negócio.</p>
+    </div>
+    <div class="row">
+      <span class="tag">Dados · IBM Plex Mono</span>
+      <div class="mono-sample">99.9% uptime · 40% economia · $14/GB · 100B+ telemetry · OpenTelemetry</div>
+    </div>
+  </div>
 
   <h2>Amostra — Hero</h2>
   <div class="hero">
@@ -147,13 +137,6 @@
       <button class="btn btn-primary">Conheça nossos serviços</button>
       <button class="btn btn-ghost">Entre em contato</button>
     </div>
-  </div>
-
-  <h2>Amostra — Cards de serviço</h2>
-  <div class="cards">
-    <div class="card"><div class="dot"></div><h4>DevOps / SRE</h4><p>Automação, CI/CD e alta disponibilidade.</p><div class="metric">99.9%</div></div>
-    <div class="card"><div class="dot"></div><h4>FinOps</h4><p>Governança e otimização de custos na nuvem.</p><div class="metric">40%</div></div>
-    <div class="card"><div class="dot"></div><h4>APM</h4><p>Observabilidade completa em tempo real.</p><div class="metric">360°</div></div>
   </div>
 </div>
 </body>

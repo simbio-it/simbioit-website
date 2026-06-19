@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    image: simbioit-website
+    container_name: simbioit-website
+    restart: unless-stopped
+    ports:
+      # porta do HOST configurável via WEB_PORT no .env (padrão 3001)
+      - "${WEB_PORT:-3001}:3001"
+    environment:
+      # Definidos no arquivo .env (não versionado)
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}

@@ -1,0 +1,326 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+ * SimbioIT design tokens — derivados do logo (ver doc/planejamento/plan.md §3)
+ * -------------------------------------------------------------------------- */
+@theme {
+  --color-brand-teal: #2cc7d3;
+  --color-brand-green: #74d693;
+  --color-brand-lime: #b6d94e;
+
+  /* Dark "soft": fundo levantado um tom (menos escuro/pesado) */
+  --color-bg-base: #111b21;
+  --color-bg-surface: #19262d;
+  --color-bg-elevated: #21323a;
+  --color-border-subtle: #2e454d;
+
+  /* Texto de corpo quase branco (alto contraste) — leitura confortável.
+     muted = secundário ainda legível; faint = só legendas/labels mono */
+  --color-ink: #eef3f3;
+  --color-ink-muted: #b4c4c3;
+  --color-ink-faint: #80999a;
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --shadow-glow: 0 0 60px -12px rgba(32, 184, 196, 0.35);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border-subtle);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-bg-base);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem; /* 17px — corpo um pouco maior, melhor leitura */
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(32, 184, 196, 0.3);
+    color: #fff;
+  }
+
+  /* Scrollbar discreta no tema escuro */
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-base);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-subtle);
+    border-radius: 99px;
+    border: 3px solid var(--color-bg-base);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2c5450;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-teal);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Utilitários de marca
+ * -------------------------------------------------------------------------- */
+@utility text-gradient {
+  background-image: linear-gradient(
+    115deg,
+    var(--color-brand-teal) 0%,
+    var(--color-brand-green) 52%,
+    var(--color-brand-lime) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-grad-brand {
+  background-image: linear-gradient(
+    135deg,
+    var(--color-brand-teal) 0%,
+    var(--color-brand-green) 55%,
+    var(--color-brand-lime) 100%
+  );
+}
+
+/* Grid sutil de telemetria, usado como atmosfera de fundo */
+@utility bg-telemetry {
+  background-image:
+    linear-gradient(to right, rgba(30, 58, 56, 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 58, 56, 0.5) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* ----------------------------------------------------------------------------
+ * Animações (todas respeitam reduced-motion via media query no fim)
+ * -------------------------------------------------------------------------- */
+@keyframes float-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-node {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Deriva ambiente (GPU: só transform) — usada nas linhas de fundo */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0);
+  }
+}
+
+/* Respiração do glow (GPU: só opacity) */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* Brilho suave deslizando no gradiente (usado no título do hero) */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.shimmer {
+  background-size: 220% auto;
+  animation: gradient-shift 9s ease-in-out infinite;
+}
+
+.animate-drift {
+  animation: drift 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-breathe {
+  animation: breathe 7s ease-in-out infinite;
+}
+
+/* --- Logo animado do hero (bolinha pulando + quadrados, ecoando o logo) --- */
+
+/* flutuação suave do símbolo */
+@keyframes logo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* tiles que "respiram" (escala + opacidade) — vários quadrados do logo */
+@keyframes tile-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* deslocamento horizontal da bolinha (vai e volta) */
+@keyframes ball-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--ball-span, 180px));
+  }
+}
+
+/* pulo da bolinha (parábola) — combinado com ball-x traça o salto */
+@keyframes ball-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(var(--ball-jump, -52px));
+  }
+}
+
+/* cursor do terminal piscando */
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ponto de telemetria percorrendo o pipeline */
+@keyframes travel-x {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes ball-squash {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.08, 0.92);
+  }
+  55% {
+    transform: scale(0.92, 1.08);
+  }
+}
+
+/* Reveal discreto: fade rápido com leve subida (sem "pulo") */
+.reveal {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: float-up 0.45s ease-out forwards;
+}
+
+/* Hover suave e padronizado para cards (substitui o spotlight que travava) */
+.card-hover {
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--color-brand-teal) 45%, transparent);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+  }
+}
